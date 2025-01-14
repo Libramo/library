@@ -3,8 +3,17 @@ import { Button } from "@/components/ui/button";
 import { signOut } from "@/auth";
 import BookList from "@/components/BookList";
 import { sampleBooks } from "@/constants";
+import { db } from "@/database/drizzle";
+import { borrowRecords } from "@/database/schema";
+import { desc } from "drizzle-orm";
 
-const Page = () => {
+const Page = async () => {
+  const borrowedBooks = (await db
+    .select()
+    .from(borrowRecords)
+    .limit(10)
+    .orderBy(desc(borrowRecords.createdAt))) as BookItem[];
+
   return (
     <>
       <form
@@ -15,10 +24,10 @@ const Page = () => {
         }}
         className="mb-10"
       >
-        <Button>Logout</Button>
+        {/* <Button>Logout</Button> */}
       </form>
 
-      <BookList title="Borrowed Books" books={sampleBooks} />
+      <BookList title="Borrowed Books" books={borrowedBooks} />
     </>
   );
 };

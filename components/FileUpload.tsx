@@ -53,13 +53,13 @@ const FileUpload = ({
   placeholder,
   folder,
   variant,
-  onFileChange,
   value,
+  onFileChange,
 }: Props) => {
   const ikUploadRef = useRef(null);
 
-  const [file, setFile] = useState<{ filePath: string | null }>({
-    filePath: value ?? null,
+  const [file, setFile] = useState<{ filePath: string | undefined }>({
+    filePath: value ?? undefined,
   });
 
   const [progress, setProgress] = useState(0);
@@ -175,21 +175,16 @@ const FileUpload = ({
         </div>
       )}
 
-      {/* {file &&
+      {file &&
         (type === "image" ? (
-          <IKImage
-            alt={file.filePath}
-            path={file.filePath}
-            width={500}
-            height={300}
-          />
+          <IKImage alt={""} path={file.filePath} width={500} height={300} />
         ) : type === "video" ? (
           <IKVideo
             path={file.filePath}
             controls={true}
             className="h-96 w-full rounded-xl"
           />
-        ) : null)} */}
+        ) : null)}
     </ImageKitProvider>
   );
 };

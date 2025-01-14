@@ -2,15 +2,14 @@ import React from "react";
 import Image from "next/image";
 import { Button } from "./ui/button";
 import BookCover from "./BookCover";
-// import BookCover from "@/components/BookCover";
-// import BorrowBook from "@/components/BorrowBook";
-// import { db } from "@/database/drizzle";
-// import { users } from "@/database/schema";
-// import { eq } from "drizzle-orm";
+import { db } from "@/database/drizzle";
+import { users } from "@/database/schema";
+import { eq } from "drizzle-orm";
+import BorrowBook from "./BorrowBook";
 
-// interface Props extends Book {
-//   userId: string;
-// }
+interface Props extends Book {
+  userId: string;
+}
 
 const BookOverview = async ({
   title,
@@ -22,21 +21,22 @@ const BookOverview = async ({
   description,
   coverColor,
   coverUrl,
-}: // userId,
-Book) => {
-  // const [user] = await db
-  //   .select()
-  //   .from(users)
-  //   .where(eq(users.id, userId))
-  //   .limit(1);
+  userId,
+  id, //This is the id of the book
+}: Props) => {
+  const [user] = await db
+    .select()
+    .from(users)
+    .where(eq(users.id, userId))
+    .limit(1);
 
-  // const borrowingEligibility = {
-  //   isEligible: availableCopies > 0 && user?.status === "APPROVED",
-  //   message:
-  //     availableCopies <= 0
-  //       ? "Book is not available"
-  //       : "You are not eligible to borrow this book",
-  // };
+  const borrowingEligibility = {
+    isEligible: availableCopies > 0 && user?.status === "APPROVED",
+    message:
+      availableCopies <= 0
+        ? "Livre indisponible"
+        : "Vous n'etes pas autoriser à emprunter",
+  };
   return (
     <section className="book-overview">
       <div className="flex flex-1 flex-col gap-5">
@@ -70,18 +70,13 @@ Book) => {
 
         <p className="book-description">{description}</p>
 
-        <Button className="book-overview_btn">
-          <Image src="/icons/book.svg" alt="icon" height={20} width={20} />
-          <p className="font-bebas-neue text-xl text-dark-100"> Emprunter</p>
-        </Button>
-
-        {/* {user && (
+        {user && (
           <BorrowBook
             bookId={id}
             userId={userId}
             borrowingEligibility={borrowingEligibility}
           />
-        )} */}
+        )}
       </div>
 
       <div className="relative flex flex-1 justify-center">
