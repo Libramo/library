@@ -12,6 +12,32 @@ export const navigationLinks = [
   },
 ];
 
+export const statuses = [
+  {
+    value: "APPROVED",
+    label: "Approved",
+  },
+  {
+    value: "PENDING",
+    label: "Pending",
+  },
+  {
+    value: "REJECTED",
+    label: "Rejected",
+  },
+];
+
+export const roles = [
+  {
+    value: "ADMIN",
+    label: "Admin",
+  },
+  {
+    value: "USER",
+    label: "User",
+  },
+];
+
 export const adminSideBarLinks = [
   {
     img: "/icons/admin/home.svg",

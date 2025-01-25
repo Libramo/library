@@ -7,6 +7,8 @@ import { cn, getInitials } from "@/lib/utils";
 import { usePathname } from "next/navigation";
 import { Avatar, AvatarFallback } from "@/components/ui/avatar";
 import { Session } from "next-auth";
+import ProfileAvatar from "./ProfileInfo";
+import ProfileInfo from "./ProfileInfo";
 
 const Sidebar = ({ session }: { session: Session }) => {
   const pathname = usePathname();
@@ -36,8 +38,10 @@ const Sidebar = ({ session }: { session: Session }) => {
               <Link href={link.route} key={link.route}>
                 <div
                   className={cn(
-                    "link",
-                    isSelected && "bg-primary-admin shadow-sm"
+                    "link ",
+                    isSelected
+                      ? "bg-primary-admin shadow-sm"
+                      : "hover:bg-blue-50"
                   )}
                 >
                   <div className="relative size-5">
@@ -60,18 +64,8 @@ const Sidebar = ({ session }: { session: Session }) => {
           })}
         </div>
       </div>
-
       <div className="user">
-        <Avatar>
-          <AvatarFallback className="bg-amber-100">
-            {getInitials(session?.user?.name || "IN")}
-          </AvatarFallback>
-        </Avatar>
-
-        <div className="flex flex-col max-md:hidden">
-          <p className="font-semibold text-dark-200">{session?.user?.name}</p>
-          <p className="text-xs text-light-500">{session?.user?.email}</p>
-        </div>
+        <ProfileInfo user={session?.user} />
       </div>
     </div>
   );

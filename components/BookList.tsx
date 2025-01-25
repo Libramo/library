@@ -15,10 +15,6 @@ interface Props {
 }
 
 const BookList = async ({ title, books, containerClassName }: Props) => {
-  // const borrowedBooks = (await db.select().from(books).eq()) as Book[];
-
-  // console.log(books[1]);
-
   if (books.length < 2) return;
 
   return (

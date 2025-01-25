@@ -8,11 +8,13 @@ import { borrowRecords } from "@/database/schema";
 import { desc } from "drizzle-orm";
 
 const Page = async () => {
-  const borrowedBooks = (await db
+  const borrowedBooks = await db
     .select()
     .from(borrowRecords)
     .limit(10)
-    .orderBy(desc(borrowRecords.createdAt))) as BookItem[];
+    .orderBy(desc(borrowRecords.createdAt));
+
+  console.log(borrowedBooks[0]);
 
   return (
     <>
@@ -27,7 +29,7 @@ const Page = async () => {
         {/* <Button>Logout</Button> */}
       </form>
 
-      <BookList title="Borrowed Books" books={borrowedBooks} />
+      {/* <BookList title="Borrowed Books" books={borrowedBooks} /> */}
     </>
   );
 };

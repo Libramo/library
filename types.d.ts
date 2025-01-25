@@ -1,3 +1,17 @@
+type Role = "USER" | "ADMIN";
+
+interface RegisteredUser {
+  id: string;
+  fullName: string;
+  email: string;
+  banUserId: number;
+  banUserCard: string;
+  status: string;
+  role: string;
+  lastActivityDate: string;
+  createdAt: Date;
+}
+
 interface Book {
   id: string;
   title: string;
@@ -51,5 +65,3 @@ interface BorrowedBook {
   status: string;
   createdAt: Date;
 }
-
-type BookItem = BorrowedBook & Book;

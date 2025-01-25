@@ -72,12 +72,14 @@ const AuthForm = <T extends FieldValues>({
   return (
     <div className="flex flex-col gap-4">
       <h1 className="text-2xl font-semibold text-white">
-        {isSignIn ? "Bienvenue sur BAN" : "Créer votre compte BAN"}
+        {isSignIn
+          ? "Bienvenue sur la plateforme de la Bibiliothèque d'Archives Nationales"
+          : "Créer votre compte BAN"}
       </h1>
       <p className="text-light-100">
         {isSignIn
           ? "Accédez à la vaste collection de ressources..."
-          : "Veuillez remplir tous les champs et télécharger une carte d'identité universitaire valide pour accéder à la bibliothèque de la BAN."}
+          : "Veuillez remplir tous les champs et télécharger une carte d'adhérent valide pour accéder à la platforme de la BAN."}
       </p>
       <Form {...form}>
         <form
@@ -128,7 +130,7 @@ const AuthForm = <T extends FieldValues>({
       </Form>
 
       <p className="text-center text-base font-medium">
-        {isSignIn ? "Nouveau sur BAN ?" : "Vous avez déja un compte ? "}
+        {isSignIn ? "Nouveau sur BAN ? " : "Vous avez déja un compte ? "}
 
         <Link
           href={isSignIn ? "/sign-up" : "/sign-in"}

@@ -202,3 +202,12 @@
         @apply text-light-500 text-sm line-clamp-1 break-words w-full;
     }
 }
+
+
+
+
+ /* ==== CUSTOM CSS */
+ /* ==== Status Badge */
+ .role-badge {
+    @apply flex w-fit items-center gap-2 rounded-sm px-4;
+  }
